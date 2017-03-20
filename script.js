@@ -67,7 +67,7 @@ window.onload = function() {
 	gui.add(fizzyText, 'fontSize', 70, 150).listen();
 	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
 	gui.add(fizzyText, 'explode');
-	// gui.add(fizzyText, 'saveImage');
+	gui.add(fizzyText, 'downloadImage');
 
 
 	// FPS
@@ -101,4 +101,14 @@ window.onload = function() {
 
 	// update();
 	startAnimating(10);
+
+	// Download the image
+	function downloadImage(link, filename) {
+		link.href = $("#fizzytext").find("canvas").prevObject[0].children[0].toDataURL();
+		link.download = filename;
+	}
+
+	$('#download').click(function() {
+		downloadImage(this, 'font.png');
+	});
 };

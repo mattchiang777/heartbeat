@@ -71,9 +71,10 @@ function FizzyText(message) {
         }
     };
 
-    // this.saveImage = function() {
-    //     var dataURL = c.toDataURL();
-    // }
+    this.downloadImage = function() {
+        var dataURL = c.toDataURL();
+        console.log(dataURL);
+    }
 
     ////////////////////////////////
 
