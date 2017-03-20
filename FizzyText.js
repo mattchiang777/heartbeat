@@ -14,12 +14,13 @@
         - maxSize
         - fontSize and fontWeight can just be randomly set
     - Git, Organize JohnnyFive/FizzyText and bundle (w/ webpack?) (Done)
-    - Set the UX of the site (how to freeze and save image?)
+    - Set the UX of the site (how to freeze and save image?) (Done)
 
     ISSUES
-    - Text can spawn out of bounds
-    - Canvas resizing (low priority)
+    - Text can spawn out of bounds (Done)
     
+    INSTRUCTIONS
+    - node Board.js to hook up to johnnyfive
 */
 
 function FizzyText(message) {
@@ -71,11 +72,6 @@ function FizzyText(message) {
         }
     };
 
-    this.downloadImage = function() {
-        var dataURL = c.toDataURL();
-        console.log(dataURL);
-    }
-
     ////////////////////////////////
 
     var _this = this;
@@ -86,6 +82,11 @@ function FizzyText(message) {
     var textOffsetLeft = Math.random() * width;
     var noiseScale = 300;
     var frameTime = 30;
+
+    // Keep the message within the canvas height bounds
+    while ((textAscent > height - 100) || textAscent < 100) {
+        textAscent = Math.random() * height;
+    }
 
     var colors = [_this.color0, _this.color1, _this.color2, _this.color3];
 
@@ -141,8 +142,12 @@ function FizzyText(message) {
         s.fillRect(0, 0, width, height);
 
         s.fillStyle = "#222";
+        // Keep the message within canvas width bounds
+        var msgWidth = s.measureText(msg).width;
+        while (textOffsetLeft + msgWidth > width) {
+            textOffsetLeft = Math.random() * width;
+        }
         s.fillText(msg, textOffsetLeft, textAscent);
-        // console.log(s.measureText(msg))
 
         // Pull reference
         var imageData = s.getImageData(0, 0, width, height);
@@ -155,7 +160,7 @@ function FizzyText(message) {
 
         that.framesRendered++;
 
-        g.clearRect(0, 0, width, height);
+        // g.clearRect(0, 0, width, height);
         // Set the shown canvas background as black
         g.rect(0, 0, width, height);
         g.fillStyle = "black";

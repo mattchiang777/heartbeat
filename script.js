@@ -55,9 +55,9 @@ window.onload = function() {
 	gui.add(fizzyText, 'message');
 	gui.add(fizzyText, 'growthSpeed', -0.01, 1).step(0.01).listen();
 	gui.add(fizzyText, 'maxSize', 0, 5).step(0.25);
-	gui.add(fizzyText, 'noiseStrength', 0, 100).listen();
-	gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
-	gui.add(fizzyText, 'displayOutline');
+	// gui.add(fizzyText, 'noiseStrength', 0, 100).listen();
+	// gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
+	// gui.add(fizzyText, 'displayOutline');
 
 	gui.addColor(fizzyText, 'color0');
 	gui.addColor(fizzyText, 'color1');
@@ -66,8 +66,7 @@ window.onload = function() {
 
 	gui.add(fizzyText, 'fontSize', 70, 150).listen();
 	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
-	gui.add(fizzyText, 'explode');
-	gui.add(fizzyText, 'downloadImage');
+	// gui.add(fizzyText, 'explode');
 
 
 	// FPS
