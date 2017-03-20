@@ -10,7 +10,10 @@
     - Integrate JohnnyFive with FizzyText (Done)
 
     - Decide how heartrate will work with animation (Wed)
-    - Git, Organize JohnnyFive/FizzyText and bundle (w/ webpack?) (Wed)
+        - growthSpeed
+        - maxSize
+        - fontSize and fontWeight can just be randomly set
+    - Git, Organize JohnnyFive/FizzyText and bundle (w/ webpack?) (Done)
     - Set the UX of the site (how to freeze and save image?)
 
     ISSUES
@@ -67,6 +70,10 @@ function FizzyText(message) {
             particles[i].vy = Math.sin(angle) * mag;
         }
     };
+
+    // this.saveImage = function() {
+    //     var dataURL = c.toDataURL();
+    // }
 
     ////////////////////////////////
 
@@ -148,6 +155,10 @@ function FizzyText(message) {
         that.framesRendered++;
 
         g.clearRect(0, 0, width, height);
+        // Set the shown canvas background as black
+        g.rect(0, 0, width, height);
+        g.fillStyle = "black";
+        g.fill();
 
         if (_this.displayOutline) {
             g.globalCompositeOperation = "source-over";
