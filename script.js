@@ -26,11 +26,12 @@ window.onload = function() {
 	}
 
 	function draw() {
+		// console.log("what");
 		stroke('red');
 		
 		temp = parseInt($(result).text());
-		// console.log("temp: " + temp);
-		// console.log(typeof temp);
+		console.log("temp: " + temp);
+		console.log(typeof temp);
 
 		temp = map(temp, 0, 1023, 0, height);
 		// console.log(inByte);
@@ -49,23 +50,26 @@ window.onload = function() {
 
 		////////////////////////////
 
-	var fizzyText = new FizzyText('Fizzy Text!');
+	var fizzyText = new FizzyText('Matthew');
 
 	var gui = new dat.GUI();
 	gui.add(fizzyText, 'message');
 	gui.add(fizzyText, 'growthSpeed', -0.01, 1).step(0.01).listen();
 	gui.add(fizzyText, 'maxSize', 0, 5).step(0.25);
-	// gui.add(fizzyText, 'noiseStrength', 0, 100).listen();
-	// gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
+	gui.add(fizzyText, 'noiseStrength', 0, 100).listen();
+	gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
+	gui.add(fizzyText, 'bgNoiseStrength', 0, 100).listen();
+	gui.add(fizzyText, 'bgSpeed', -1, 1).step(0.01).listen();
 	// gui.add(fizzyText, 'displayOutline');
 
 	gui.addColor(fizzyText, 'color0');
 	gui.addColor(fizzyText, 'color1');
 	gui.addColor(fizzyText, 'color2');
 	gui.addColor(fizzyText, 'color3');
+	gui.addColor(fizzyText, 'bgParticleColor');
 
-	gui.add(fizzyText, 'fontSize', 70, 150).listen();
-	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
+	gui.add(fizzyText, 'fontSize', 70, 200).listen();
+	// gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
 	// gui.add(fizzyText, 'explode');
 
 
@@ -82,24 +86,25 @@ window.onload = function() {
 		update();
 	}
 
-		var counter = 1;
-		var update = function() {
-		  	requestAnimationFrame(update);
+	var counter = 1;
+	var update = function() {
+	  	requestAnimationFrame(update);
 
-		  	// calc elapsed time since last loop
-		  	now = Date.now();
-		  	elapsed = now - then;
+	  	// calc elapsed time since last loop
+	  	now = Date.now();
+	  	elapsed = now - then;
 
-		  	if (elapsed > fpsInterval) {
-		  		theta += 0.02
-				fizzyText.noiseStrength = Math.abs(Math.sin(theta) * 100);
-				// fizzyText.noiseStrength = Math.abs(Math.sin(temp) * 100);
-				fizzyText.speed = Math.sin(theta / 2);
-		  	}
-		}
+	  	if (elapsed > fpsInterval) {
+	  		theta += 0.02
+			fizzyText.bgNoiseStrength  = Math.abs(Math.sin(theta) * 100);
+			// fizzyText.noiseStrength = Math.abs(Math.sin(temp) * 50);
+			fizzyText.bgSpeed = Math.sin(theta / 2);
+			// fizzyText.speed = Math.abs(Math.sin(temp));
+	  	}
+	}
 
 	// update();
-	startAnimating(10);
+	startAnimating(50);
 
 	// Download the image
 	function downloadImage(link, filename) {

@@ -20,6 +20,8 @@
     - Text can spawn out of bounds (Done)
     
     INSTRUCTIONS
+    - npm install pubnub@3.15.2
+	- npm install johnny-five
     - node Board.js to hook up to johnnyfive
 */
 
@@ -32,19 +34,26 @@ function FizzyText(message) {
     // Otherwise, gui-dat can't see them.
 
     this.growthSpeed = 0.2; // how fast do particles change size?
-    this.maxSize = 3; // how big can they get?
+    this.maxSize = getRandomIntInclusive(3, 4); // how big can they get?
     this.noiseStrength = 10; // how turbulent is the flow?
+    this.bgNoiseStrength = 10;
     this.speed = 0.4; // how fast do particles move?
+    this.bgSpeed = 0.4;
     this.displayOutline = false; // should we draw the message as a stroke?
     this.framesRendered = 0;
 
-    this.color0 = "#00aeff";
-    this.color1 = "#0fa954";
-    this.color2 = "#54396e";
-    this.color3 = "#e61d5f";
+    // this.color0 = "#00aeff";
+    // this.color1 = "#0fa954";
+    // this.color2 = "#54396e";
+    // this.color3 = "#e61d5f";
+    this.color0 = "#ffdcfc";
+    this.color1 = "#c8feff";
+    this.color2 = "#ffffff";
+    this.color3 = "#c8feff";
+    this.bgParticleColor = "#ffffff";
 
-    this.fontSize = 100;
-    // this.fontSize = Math.random() * 100;
+    // this.fontSize = 100;
+    this.fontSize = getRandomIntInclusive(90, 150);
     this.fontWeight = 800;
 
     // __defineGetter__ and __defineSetter__ make JavaScript believe that
@@ -120,7 +129,7 @@ function FizzyText(message) {
     s.font = g.font = fontAttr;
 
     // Instantiate some particles
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 2000; i++) {
         particles.push(new Particle(Math.random() * width, Math.random() * height));
     }
 
@@ -183,7 +192,7 @@ function FizzyText(message) {
 
         // Choose bg particle color (white for testing)
         for (var i = 0; i < bgParticles.length; i++) {
-            g.fillStyle = "#ffffff";
+            g.fillStyle = _this.bgParticleColor;
             bgParticles[i].render();
         }
 
@@ -344,7 +353,7 @@ function FizzyText(message) {
             var c = getColor(this.x, this.y);
 
             // Where should we move?
-            var angle = noise(this.x / noiseScale, this.y / noiseScale) * _this.noiseStrength;
+            var angle = noise(this.x / noiseScale, this.y / noiseScale) * _this.bgNoiseStrength;
 
             // Are we within the boundaries of the image?
             var onScreen = this.x > 0 && this.x < width && this.y > 0 && this.y < height;
@@ -372,8 +381,8 @@ function FizzyText(message) {
             this.vy *= 0.5;
 
             // Change our position based on the flow field and our explode velocity.
-            this.x += Math.cos(angle) * _this.speed + this.vx;
-            this.y += -Math.sin(angle) * _this.speed + this.vy;
+            this.x += Math.cos(angle) * _this.bgSpeed + this.vx;
+            this.y += -Math.sin(angle) * _this.bgSpeed + this.vy;
 
             // this.r = 3;
             // debugger
@@ -394,4 +403,10 @@ function FizzyText(message) {
         }
     }
 
+}
+
+function getRandomIntInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }

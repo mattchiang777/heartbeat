@@ -20,7 +20,7 @@ board.on("ready", function() {
 
 	var sensor = new five.Sensor({
 		pin: "A0",
-		freq: 1000
+		freq: 750
 	});
 
 	sensor.on("change", function() {
