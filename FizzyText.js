@@ -46,14 +46,20 @@ function FizzyText(message) {
     // this.color1 = "#0fa954";
     // this.color2 = "#54396e";
     // this.color3 = "#e61d5f";
-    this.color0 = "#ffdcfc";
-    this.color1 = "#c8feff";
-    this.color2 = "#ffffff";
-    this.color3 = "#c8feff";
+    
+    // this.color0 = "#ffdcfc";
+    // this.color1 = "#c8feff";
+    // this.color2 = "#ffffff";
+    // this.color3 = "#c8feff";
+
+    this.color0 = "#f3e09b";
+    this.color1 = "#00a9f5";
+    this.color2 = "#ffbade";
+    this.color3 = "#ff7699";
     this.bgParticleColor = "#ffffff";
 
-    // this.fontSize = 100;
-    this.fontSize = getRandomIntInclusive(90, 150);
+    this.fontSize = 140;
+    // this.fontSize = getRandomIntInclusive(90, 150);
     this.fontWeight = 800;
 
     // __defineGetter__ and __defineSetter__ make JavaScript believe that
@@ -134,7 +140,7 @@ function FizzyText(message) {
     }
 
     // 2nd perlin field
-    for (var i = 0; i < 1000; i++) { // 10k particles
+    for (var i = 0; i < 0; i++) { // 10k particles
         bgParticles.push(new bgParticle(Math.random() * width, Math.random() * height));
     }
 
