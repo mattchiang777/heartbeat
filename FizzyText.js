@@ -34,10 +34,11 @@ function FizzyText(message) {
     // Otherwise, gui-dat can't see them.
 
     this.growthSpeed = 0.2; // how fast do particles change size?
-    this.maxSize = getRandomIntInclusive(3, 4); // how big can they get?
-    this.noiseStrength = 10; // how turbulent is the flow?
+    // this.maxSize = getRandomIntInclusive(3, 4); // how big can they get?
+    this.maxSize = 3;
+    this.noiseStrength = 5; // how turbulent is the flow?
     this.bgNoiseStrength = 10;
-    this.speed = 0.4; // how fast do particles move?
+    this.speed = -0.4; // how fast do particles move?
     this.bgSpeed = 0.4;
     this.displayOutline = false; // should we draw the message as a stroke?
     this.framesRendered = 0;
@@ -93,8 +94,10 @@ function FizzyText(message) {
 
     var width = window.innerWidth;
     var height = window.innerHeight;
-    var textAscent = Math.random() * height;
-    var textOffsetLeft = Math.random() * width;
+    // var textAscent = Math.random() * height; // for trans
+    var textAscent = height / 2; // for cisco
+    // var textOffsetLeft = Math.random() * width;
+    var textOffsetLeft = 0;
     var noiseScale = 300;
     var frameTime = 30;
 
@@ -131,16 +134,16 @@ function FizzyText(message) {
     var bgParticles2 = [];
 
     // Set g.font to the same font as the bitmap canvas, incase we want to draw some outlines
-    var fontAttr = _this.fontWeight + " " + _this.fontSize + "px helvetica, arial, sans-serif";
+    var fontAttr = _this.fontWeight + " " + _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif";
     s.font = g.font = fontAttr;
 
     // Instantiate some particles
-    for (var i = 0; i < 2000; i++) {
+    for (var i = 0; i < 2300; i++) {
         particles.push(new Particle(Math.random() * width, Math.random() * height));
     }
 
     // 2nd perlin field
-    for (var i = 0; i < 0; i++) { // 10k particles
+    for (var i = 0; i < 1000; i++) { // 10k particles
         bgParticles.push(new bgParticle(Math.random() * width, Math.random() * height));
     }
 
@@ -159,9 +162,10 @@ function FizzyText(message) {
         s.fillStyle = "#222";
         // Keep the message within canvas width bounds
         var msgWidth = s.measureText(msg).width;
-        while (textOffsetLeft + msgWidth > width) {
-            textOffsetLeft = Math.random() * width;
-        }
+        // while (textOffsetLeft + msgWidth > widthw) {
+        //     // textOffsetLeft = Math.random() * width;
+        // }
+        textOffsetLeft = (width - msgWidth) / 2;
         s.fillText(msg, textOffsetLeft, textAscent);
 
         // Pull reference
@@ -178,12 +182,15 @@ function FizzyText(message) {
         // g.clearRect(0, 0, width, height);
         // Set the shown canvas background as black
         g.rect(0, 0, width, height);
-        g.fillStyle = "black";
+        g.fillStyle = "black"; // for trans
+        // g.fillStyle = "#eee"; // for cisco
         g.fill();
 
         if (_this.displayOutline) {
             g.globalCompositeOperation = "source-over";
-            g.strokeStyle = "#000";
+            // g.strokeStyle = "#000"; // for trans
+            g.strokeStyle = "#fff";
+            g.font = _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif"; // took out font weight
             g.lineWidth = .5;
             g.strokeText(message, textOffsetLeft, textAscent);
         }
@@ -249,7 +256,7 @@ function FizzyText(message) {
     var loop = function() {
         // Reset color array
         colors = [_this.color0, _this.color1, _this.color2, _this.color3]; // Change colors from dat.gui
-        s.font = g.font = _this.fontWeight + " " + _this.fontSize + "px helvetica, arial, sans-serif";
+        s.font = g.font = _this.fontWeight + " " + _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif";
         createBitmap(message);
         // _this.fontSize += 1;
         resizeCanvas();

@@ -50,7 +50,7 @@ window.onload = function() {
 
 		////////////////////////////
 
-	var fizzyText = new FizzyText('Protect Trans Kids');
+	var fizzyText = new FizzyText('');
 
 	var gui = new dat.GUI();
 	gui.add(fizzyText, 'message');
@@ -60,7 +60,7 @@ window.onload = function() {
 	gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
 	gui.add(fizzyText, 'bgNoiseStrength', 0, 100).listen();
 	gui.add(fizzyText, 'bgSpeed', -1, 1).step(0.01).listen();
-	// gui.add(fizzyText, 'displayOutline');
+	gui.add(fizzyText, 'displayOutline');
 
 	gui.addColor(fizzyText, 'color0');
 	gui.addColor(fizzyText, 'color1');
@@ -70,7 +70,7 @@ window.onload = function() {
 
 	gui.add(fizzyText, 'fontSize', 70, 1000).listen();
 	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
-	// gui.add(fizzyText, 'explode');
+	gui.add(fizzyText, 'explode');
 
 
 	// FPS
@@ -96,7 +96,7 @@ window.onload = function() {
 
 	  	if (elapsed > fpsInterval) {
 	  		theta += 0.02
-			fizzyText.bgNoiseStrength  = Math.abs(Math.sin(theta) * 100);
+			// fizzyText.bgNoiseStrength  = Math.abs(Math.sin(theta) * 100);
 			// fizzyText.noiseStrength = Math.abs(Math.sin(temp) * 50);
 			// fizzyText.noiseStrength = Math.abs(Math.sin(theta) * 50);
 			fizzyText.bgSpeed = Math.sin(theta / 2);
@@ -117,4 +117,10 @@ window.onload = function() {
 	$('#download').click(function() {
 		downloadImage(this, 'font.png');
 	});
+
+	// Cisco logo centering
+	var logo = $('#logo');
+	$('#panel').click(function() {
+		logo.fadeToggle(800);
+	})
 };
