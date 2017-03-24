@@ -131,25 +131,19 @@ function FizzyText(message) {
     // Stores a list of particles
     var particles = [];
     var bgParticles = [];
-    var bgParticles2 = [];
 
     // Set g.font to the same font as the bitmap canvas, incase we want to draw some outlines
-    var fontAttr = _this.fontWeight + " " + _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif";
+    var fontAttr = _this.fontWeight + " " + _this.fontSize + "px helvetica, arial, sans-serif";
     s.font = g.font = fontAttr;
 
     // Instantiate some particles
-    for (var i = 0; i < 2300; i++) {
+    for (var i = 0; i < 2000; i++) {
         particles.push(new Particle(Math.random() * width, Math.random() * height));
     }
 
     // 2nd perlin field
     for (var i = 0; i < 1000; i++) { // 10k particles
         bgParticles.push(new bgParticle(Math.random() * width, Math.random() * height));
-    }
-
-    // 3rd perlin field
-    for (var i = 0; i < 0; i++) {
-        bgParticles2.push(new bgParticle(Math.random() * width, Math.random() * height));
     }
 
     // This function creates a bitmap of pixels based on your message
@@ -190,7 +184,7 @@ function FizzyText(message) {
             g.globalCompositeOperation = "source-over";
             // g.strokeStyle = "#000"; // for trans
             g.strokeStyle = "#fff";
-            g.font = _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif"; // took out font weight
+            g.font = _this.fontSize + "px helvetica, arial, sans-serif"; // took out font weight
             g.lineWidth = .5;
             g.strokeText(message, textOffsetLeft, textAscent);
         }
@@ -207,12 +201,6 @@ function FizzyText(message) {
         for (var i = 0; i < bgParticles.length; i++) {
             g.fillStyle = _this.bgParticleColor;
             bgParticles[i].render();
-        }
-
-        // Choose 2nd bg particle color
-        for (var i = 0; i < bgParticles.length; i++) {
-            g.fillStyle = "#00aeff";
-            // bgParticles2[i].render();
         }
     };
 
@@ -256,7 +244,7 @@ function FizzyText(message) {
     var loop = function() {
         // Reset color array
         colors = [_this.color0, _this.color1, _this.color2, _this.color3]; // Change colors from dat.gui
-        s.font = g.font = _this.fontWeight + " " + _this.fontSize + "px CiscoSansThinOblique, helvetica, arial, sans-serif";
+        s.font = g.font = _this.fontWeight + " " + _this.fontSize + "px helvetica, arial, sans-serif";
         createBitmap(message);
         // _this.fontSize += 1;
         resizeCanvas();

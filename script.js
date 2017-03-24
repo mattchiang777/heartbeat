@@ -50,13 +50,13 @@ window.onload = function() {
 
 		////////////////////////////
 
-	var fizzyText = new FizzyText('');
+	var fizzyText = new FizzyText('Message');
 
 	var gui = new dat.GUI();
 	gui.add(fizzyText, 'message');
 	gui.add(fizzyText, 'growthSpeed', -0.01, 1).step(0.01).listen();
 	gui.add(fizzyText, 'maxSize', 0, 8).step(0.25);
-	gui.add(fizzyText, 'noiseStrength', 0, 100).listen();
+	gui.add(fizzyText, 'noiseStrength', -100, 100).listen();
 	gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
 	gui.add(fizzyText, 'bgNoiseStrength', 0, 100).listen();
 	gui.add(fizzyText, 'bgSpeed', -1, 1).step(0.01).listen();
@@ -68,7 +68,7 @@ window.onload = function() {
 	gui.addColor(fizzyText, 'color3');
 	gui.addColor(fizzyText, 'bgParticleColor');
 
-	gui.add(fizzyText, 'fontSize', 70, 1000).listen();
+	gui.add(fizzyText, 'fontSize', 70, 500).listen();
 	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
 	gui.add(fizzyText, 'explode');
 
@@ -96,7 +96,7 @@ window.onload = function() {
 
 	  	if (elapsed > fpsInterval) {
 	  		theta += 0.02
-			// fizzyText.bgNoiseStrength  = Math.abs(Math.sin(theta) * 100);
+			fizzyText.bgNoiseStrength  = Math.abs(Math.sin(theta) * 100);
 			// fizzyText.noiseStrength = Math.abs(Math.sin(temp) * 50);
 			// fizzyText.noiseStrength = Math.abs(Math.sin(theta) * 50);
 			fizzyText.bgSpeed = Math.sin(theta / 2);
