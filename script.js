@@ -50,7 +50,7 @@ window.onload = function() {
 
 		////////////////////////////
 
-	var fizzyText = new FizzyText('Message');
+	var fizzyText = new FizzyText('Protect trans kids');
 
 	var gui = new dat.GUI();
 	gui.add(fizzyText, 'message');
@@ -60,17 +60,17 @@ window.onload = function() {
 	gui.add(fizzyText, 'speed', -1, 1).step(0.01).listen();
 	gui.add(fizzyText, 'bgNoiseStrength', 0, 100).listen();
 	gui.add(fizzyText, 'bgSpeed', -1, 1).step(0.01).listen();
-	gui.add(fizzyText, 'displayOutline');
+	// gui.add(fizzyText, 'displayOutline');
 
 	gui.addColor(fizzyText, 'color0');
 	gui.addColor(fizzyText, 'color1');
 	gui.addColor(fizzyText, 'color2');
 	gui.addColor(fizzyText, 'color3');
-	gui.addColor(fizzyText, 'bgParticleColor');
+	// gui.addColor(fizzyText, 'bgParticleColor');
 
 	gui.add(fizzyText, 'fontSize', 70, 500).listen();
 	gui.add(fizzyText, 'fontWeight', 100, 1000).step(100);
-	gui.add(fizzyText, 'explode');
+	// gui.add(fizzyText, 'explode');
 
 
 	// FPS

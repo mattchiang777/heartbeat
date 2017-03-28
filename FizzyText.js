@@ -1,4 +1,10 @@
 /*
+    Credits: Most of the original code seems to have been
+    written by George Michael Brower. The changes I've made
+    include adding background particle animations, text
+    placement and modification, and integration with a 
+    sparkfun heart rate monitor by using Pubnub and johnny-five.
+
     TODO
     - Set dat.gui (done)
     - Try out different animations
